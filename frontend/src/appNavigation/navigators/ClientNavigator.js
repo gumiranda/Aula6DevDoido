@@ -1,15 +1,15 @@
 import {createAppContainer} from 'react-navigation';
 import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/Octicons';
+import LinearGradient from 'react-native-linear-gradient';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import {darken} from 'polished';
 import {useDispatch} from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import appMetrics from '../../utils/appMetrics';
-import {signOut} from '../../appStore/appModules/auth/actions';
 import Profile from '../../screens/Profile/Profile';
 import {appColors} from '../../utils/appColors';
+import appMetrics from '../../utils/appMetrics';
+import {signOut} from '../../appStore/appModules/auth/actions';
 
 function Logout() {
   const dispatch = useDispatch();
@@ -19,17 +19,6 @@ function Logout() {
   return <></>;
 }
 
-const drawerButton = navigation => (
-  <Icon
-    style={{padding: 10, color: appColors.white}}
-    name="three-bars"
-    size={30}
-    color={appColors.black}
-    onPress={() => {
-      navigation.toggleDrawer();
-    }}
-  />
-);
 const RootStack = createDrawerNavigator(
   {
     Profile: {
@@ -53,7 +42,6 @@ const RootStack = createDrawerNavigator(
       ),
       headerTintColor: appColors.white,
       title: 'Dev Doido',
-      gesturesEnabled: true,
       headerLeft: () => (
         <Icon
           style={{padding: 10, color: appColors.white}}
@@ -72,7 +60,6 @@ const RootStack = createDrawerNavigator(
     }),
   },
 );
-
 export default createAppContainer(
   createStackNavigator({RootStack: {screen: RootStack}}),
 );
